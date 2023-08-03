@@ -1,0 +1,88 @@
+* Get current date
+- Get current date function
+** Using fuction command
+
+#+begin_src shell
+  # Define you function here
+  get_today()
+  {
+      TODAY=`date '+%F'` 
+      echo $TODAY
+  }
+  # Invoke get today function
+  ret=$(get_today)
+
+  # Print the result
+  echo $ret
+  echo $ret | pbcopy
+#+end_src
+
+#+RESULTS:
+: 2023-08-03
+
+** Use variable
+
+#+begin_src shell
+  get_today()
+  {
+      TODAY=`date '+%F'` 
+  }
+  get_today
+  echo $TODAY
+#+end_src
+
+#+RESULTS:
+: 2023-08-03
+* Find last file day
+#+begin_src shell
+  # Define you function here
+  get_today()
+  {
+      TODAY=`date '+%F'` 
+      echo $TODAY
+  }
+  # Invoke get today function
+  ret=$(get_today)
+
+  # Print the result
+  echo $ret
+  echo $ret | pbcopy
+#+end_src
+
+#+RESULTS:
+: 2023-08-03
+
+** Use variable
+
+#+begin_src shell
+  get_today()
+  {
+      TODAY=`date '+%F'` 
+  }
+  get_today
+  echo $TODAY
+#+end_src
+
+#+RESULTS:
+: 2023-08-03
+* Find last file day
+
+#+begin_src shell
+  # Define you function here
+  get_lasted_file () {
+      doc=$1
+      file=( "$(ls -r ~/Documents | grep '^2023-' | head -1)" )
+      echo $file
+  }
+  # Invoke get today function
+  dic='~/Documents'
+  # get_lasted_file $dic
+  ret=$(get_lasted_file $dic)
+  echo $ret
+
+  # Print the result
+  # echo $ret
+#+end_src
+
+#+RESULTS:
+: 2023-06-15.org
