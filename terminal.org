@@ -34,38 +34,6 @@
 #+RESULTS:
 : 2023-08-03
 * Find last file day
-#+begin_src shell
-  # Define you function here
-  get_today()
-  {
-      TODAY=`date '+%F'` 
-      echo $TODAY
-  }
-  # Invoke get today function
-  ret=$(get_today)
-
-  # Print the result
-  echo $ret
-  echo $ret | pbcopy
-#+end_src
-
-#+RESULTS:
-: 2023-08-03
-
-** Use variable
-
-#+begin_src shell
-  get_today()
-  {
-      TODAY=`date '+%F'` 
-  }
-  get_today
-  echo $TODAY
-#+end_src
-
-#+RESULTS:
-: 2023-08-03
-* Find last file day
 
 #+begin_src shell
   # Define you function here
@@ -85,4 +53,48 @@
 #+end_src
 
 #+RESULTS:
-: 2023-06-15.org
+: 2023-07-31.md
+
+* Copy last org file
+#+begin_src shell :tangle ~/SOFT/bin/em-daily
+  #!/bin/bash
+  dailyFolder=~/Documents/org/daily
+
+  lastestFile=( "$(ls -r $dailyFolder | grep '^2023-' | head -1)" )
+  echo $lastestFile
+  todayFile=`date '+%F'.org`
+  echo $todayFile
+
+  cd $dailyFolder
+  if [ "$lastestFile" = "$todayFile" ]; then
+      echo "Existing file $todayFile"
+  else
+      eval "cp $lastestFile $todayFile"
+      echo "Make daily file $todayFile successfully."
+  fi
+  eval "~/SOFT/bin/emacs-dir/Emacs -q -l ~/.emacs.d/init.el $dailyFolder/$todayFile"
+#+end_src
+
+#+RESULTS:
+| 2023-08-07.org |      |                |
+| 2023-08-07.org |      |                |
+| Existing       | file | 2023-08-07.org |
+
+* Compare string
+
+#+begin_src shell
+#!/bin/bash
+
+VAR1="Linuxize"
+VAR2="Linuxize1"
+
+if [ "$VAR1" = "$VAR2" ]; then
+    echo "Strings are equal."
+else
+    echo "Strings are not equal."
+fi
+
+#+end_src
+
+#+RESULTS:
+: Strings are not equal
